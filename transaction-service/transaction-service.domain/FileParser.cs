@@ -3,8 +3,8 @@ using transaction_service.domain.Dto;
 
 namespace transaction_service.domain
 {
-    public abstract class FileParser
+    public interface IFileParser
     {
-        public abstract IEnumerable ParseFile(FileDto file);
+        public IEnumerable ParseFile(FileDto file);
     }
 }

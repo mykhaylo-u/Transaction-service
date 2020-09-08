@@ -5,9 +5,9 @@ using transaction_service.domain.Dto;
 
 namespace transaction_service.services.Services.XmlFileParser
 {
-    public class XmlFileParser : FileParser
+    public class XmlFileParser : IFileParser
     {
-        public override IEnumerable ParseFile(FileDto file)
+        public IEnumerable ParseFile(FileDto file)
         {
             //TODO implement parsing xml file
             throw new NotImplementedException();

@@ -8,10 +8,13 @@ namespace transaction_service.services.Services
     public class FileUploader : IFileUploader
     {
         private readonly ILogger<FileUploader> _logger;
+        private readonly IFileParserFactory _fileParserFactory;
 
-        public FileUploader(ILogger<FileUploader> logger)
+
+        public FileUploader(ILogger<FileUploader> logger, IFileParserFactory fileParserFactory)
         {
             _logger = logger;
+            _fileParserFactory = fileParserFactory;
         }
 
         public async Task<bool> UploadFile(FileDto file)

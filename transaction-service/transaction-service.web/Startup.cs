@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using transaction_service.domain.Interfaces;
+using transaction_service.services;
 using transaction_service.services.Services;
 
 namespace transaction_service.web
@@ -22,6 +23,7 @@ namespace transaction_service.web
         {
             services.AddControllersWithViews();
             services.AddScoped<IFileUploader, FileUploader>();
+            services.AddScoped<IFileParserFactory, FileParserFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
