@@ -1,0 +1,27 @@
+﻿@model transaction_service.web.Models.FileViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="page-container">
+    <div class="uploader-container">
+        @using (Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="input-group">
+                <div class="custom-file">
+                    @Html.TextBoxFor(x => x.File, new { type = "file", @class = "custom-file-input", name = "fileModel" })
+                    @Html.LabelFor(x => x.File, "Select file", new { @class = "custom-file-label" })
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">Submit</button>
+                </div>
+
+            </div>}
+        @if (TempData["IsSuccess"] != null)
+        {
+            <p>@Html.LabelFor(x => x.File, TempData["IsSuccess"].ToString(), new { @class = "text-success" })</p>
+        }
+        <p>@Html.ValidationMessageFor(x => x.File, "", new { @class = "text-danger" })</p>
+        <p>@Html.ValidationMessageFor(x => x.Exception, "", new { @class = "text-danger" })</p>
+    </div>
+</div>

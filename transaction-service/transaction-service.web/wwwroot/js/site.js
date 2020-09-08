@@ -1,4 +1,6 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿//This script will show file name on selected form
 
-// Write your JavaScript code.
+$(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(".custom-file-label").addClass("selected").html(fileName);
+});
