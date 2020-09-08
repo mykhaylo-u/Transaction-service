@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using transaction_service.domain.Dto;
 using transaction_service.domain.Interfaces;
+using transaction_service.services.Helpers;
 using transaction_service.web.Models;
 
 namespace file_uploader.web.Controllers
@@ -52,7 +53,7 @@ namespace file_uploader.web.Controllers
                 var file = new FileDto
                 {
                     FileName = Path.GetFileName(fileViewModel.File.FileName),
-                    Extension = Path.GetExtension(fileViewModel.File.FileName).Substring(1),
+                    Extension = FileExtensionHelper.GetFileExtension(fileViewModel.File.FileName),
                     Content = memoryStream.ToArray()
                 };
 

@@ -19,8 +19,8 @@ namespace transaction_service.services.Services
 
         public async Task<bool> UploadFile(FileDto file)
         {
-
-            //TODO: create a proper parser 
+            var fileReader = _fileParserFactory.CreateParser(file.Extension);
+            //TODO:  
             //      parse file
             //      save data to db
             return true;

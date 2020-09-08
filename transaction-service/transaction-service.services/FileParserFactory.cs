@@ -1,36 +1,37 @@
 ﻿using System;
 using transaction_service.domain;
+using transaction_service.domain.Entities;
 using transaction_service.domain.Enums;
 using transaction_service.domain.Interfaces;
-using transaction_service.services.Services.CsvFileParser;
-using transaction_service.services.Services.XmlFileParser;
+using transaction_service.services.Services.CsvFileService;
+using transaction_service.services.Services.XmlFileService;
 
 namespace transaction_service.services
 {
     public class FileParserFactory : IFileParserFactory
     {
-        public IFileParser CreateParser(FileExtension fileExtension)
+        public IFileReader<Transaction> CreateParser(FileExtension fileExtension)
         {
             switch (fileExtension)
             {
                 case FileExtension.Csv:
-                    return CreateCsvFileReader();
+                    return CreateCsvFileParser();
                 case FileExtension.Xml:
-                    return CreateXmlFileReader();
+                    return CreateXmlFileParser();
                 default:
-                    //TODO: Error proper error handling
+                    //TODO: Add proper error handling
                     throw new NotImplementedException();
             }
         }
 
-        private CsvFileReader CreateCsvFileReader()
+        private CsvFileParser CreateCsvFileParser()
         {
-            return new CsvFileReader();
+            return new CsvFileParser();
         }
 
-        private XmlFileReader CreateXmlFileReader()
+        private XmlFileParser CreateXmlFileParser()
         {
-            return new XmlFileReader();
+            return new XmlFileParser();
         }
     }
 }
