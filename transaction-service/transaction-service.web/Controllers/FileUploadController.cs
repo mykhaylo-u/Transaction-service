@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using transaction_service.domain.Dto;
+using transaction_service.domain.Interfaces;
 using transaction_service.web.Models;
 
 namespace file_uploader.web.Controllers
@@ -8,9 +12,12 @@ namespace file_uploader.web.Controllers
     public class FileUploadController : Controller
     {
         private readonly ILogger<FileUploadController> _logger;
+        private readonly IFileUploader _fileUploader;
 
-        public FileUploadController(ILogger<FileUploadController> logger)
+
+        public FileUploadController(IFileUploader fileUploader, ILogger<FileUploadController> logger)
         {
+            _fileUploader = fileUploader;
             _logger = logger;
         }
 
@@ -30,7 +37,7 @@ namespace file_uploader.web.Controllers
         /// <param name="fileViewModel"></param>
         /// <returns></returns>
         [HttpPost("fileUpload")]
-        public IActionResult FileUpload(FileViewModel fileViewModel)
+        public async Task<IActionResult> FileUpload(FileViewModel fileViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +46,17 @@ namespace file_uploader.web.Controllers
 
             try
             {
-               //TODO : proceed with upload file process
+                await using var memoryStream = new MemoryStream();
+                await fileViewModel.File.CopyToAsync(memoryStream);
+
+                var file = new FileDto
+                {
+                    FileName = Path.GetFileName(fileViewModel.File.FileName),
+                    Extension = Path.GetExtension(fileViewModel.File.FileName).Substring(1),
+                    Content = memoryStream.ToArray()
+                };
+
+                await _fileUploader.UploadFile(file);
 
                 TempData["IsSuccess"] = "File has been uploaded successfully.";
             }

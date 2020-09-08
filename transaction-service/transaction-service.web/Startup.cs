@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using transaction_service.domain.Interfaces;
+using transaction_service.services.Services;
 
 namespace transaction_service.web
 {
@@ -19,6 +21,7 @@ namespace transaction_service.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IFileUploader, FileUploader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +41,6 @@ namespace transaction_service.web
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

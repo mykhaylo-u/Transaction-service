@@ -4,3 +4,7 @@
 /transaction-service/.vs/transaction-service/v16/*.suo
 /transaction-service/.vs/transaction-service/DesignTimeBuild/*.v2
 *.user
+/transaction-service/transaction-service.domain/obj
+/transaction-service/transaction-service.domain/bin/Debug/netcoreapp3.1
+/transaction-service/transaction-service.services/bin/Debug/netcoreapp3.1
+/transaction-service/transaction-service.services/obj
