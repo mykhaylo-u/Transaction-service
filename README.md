@@ -2,12 +2,11 @@
 transaction-service
 
 1. Transaction service supporting files:  
-  1.1 csv  
-    Example:  
+  1.1 *.csv  
+     Example:  
             "Invoice0000001","1,000.00","USD","20/02/2019 12:33:16","Approved"  
-            "Invoice0000002","300.00","USD","21/02/2019 02:04:59","Failed"  
-       
-  1.2 xml  
+            "Invoice0000002","300.00","USD","21/02/2019 02:04:59","Failed"
+  1.2 *.xml  
     Example:  
     ```<Transactions>
        <Transaction id="Inv00001">
