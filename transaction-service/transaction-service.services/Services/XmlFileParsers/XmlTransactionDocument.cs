@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using transaction_service.domain.Entities;
 
-namespace transaction_service.services.Services.XmlFileService.SchemaDocuments
+namespace transaction_service.services.Services.XmlFileParsers
 {
     [XmlType("Transaction")]
-    public class XmlTransactionDocument : XmlSchemaDocument<Transaction>
+    public class XmlTransactionDocument
     {
         [XmlAttribute("id")]
         public string Id { get; set; }
@@ -21,7 +21,7 @@ namespace transaction_service.services.Services.XmlFileService.SchemaDocuments
         public XmlTransactionStatusDocument Status { get; set; }
 
 
-        public override async Task<Transaction> ToEntity()
+        public async Task<Transaction> MapToEntity()
         {
             return await Task.Run(() => new Transaction
             {

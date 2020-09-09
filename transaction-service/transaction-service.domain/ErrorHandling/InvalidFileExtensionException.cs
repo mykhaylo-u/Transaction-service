@@ -2,17 +2,17 @@
 
 namespace transaction_service.domain.ErrorHandling
 {
-    public class FileExtensionException : Exception
+    public class InvalidFileExtensionException : Exception
     {
         public Exception CausingException { get; }
 
-        public FileExtensionException(Exception causingException)
+        public InvalidFileExtensionException(Exception causingException)
             : base(causingException?.Message ?? "Incorrect file extension.")
         {
             CausingException = causingException;
         }
 
-        public FileExtensionException() : base("Incorrect file extension.")
+        public InvalidFileExtensionException() : base("Incorrect file extension.")
         {
         }
     }

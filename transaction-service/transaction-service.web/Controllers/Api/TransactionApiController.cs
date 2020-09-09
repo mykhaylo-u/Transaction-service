@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using transaction_service.domain.Interfaces;
 using transaction_service.web.Models.Dto;
 
-namespace transaction_service.web.Controllers
+namespace transaction_service.web.Controllers.Api
 {
     [Route("api/transactions")]
     [ApiController]

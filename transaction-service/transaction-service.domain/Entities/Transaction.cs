@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace transaction_service.domain.Entities
 {
-    public class Transaction : Entity
+    public class Transaction
     {
         [Key]
         [MaxLength(50)]

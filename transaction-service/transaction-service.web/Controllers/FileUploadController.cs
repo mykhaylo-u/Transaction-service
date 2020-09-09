@@ -54,12 +54,16 @@ namespace file_uploader.web.Controllers
                 {
                     FileName = Path.GetFileName(fileViewModel.File.FileName),
                     Extension = FileExtensionHelper.GetFileExtension(fileViewModel.File.FileName),
-                    Content = memoryStream.ToArray()
                 };
 
-                await _fileUploader.UploadFile(file);
-
-                TempData["IsSuccess"] = "File has been uploaded successfully.";
+                var result = await _fileUploader.UploadFile(file, memoryStream);
+                if (result)
+                {
+                    TempData["IsSuccess"] = "File has been uploaded successfully.";
+                }else
+                {
+                    ModelState.AddModelError("Exception", $"Internal server error.");
+                }
             }
             catch (Exception e)
             {

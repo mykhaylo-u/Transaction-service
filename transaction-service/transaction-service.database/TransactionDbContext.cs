@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using transaction_service.domain.Entities;
 
@@ -28,23 +29,11 @@ namespace transaction_service.database
             }
         }
 
-        public async Task<Transaction> Add(Transaction transaction)
+        public async Task AddRangeAsync(List<Transaction> transactions)
         {
-            var createdEntry = Transactions.Attach(transaction);
-            base.Entry(transaction).State = EntityState.Added;
-            return createdEntry.Entity;
+            await base.AddRangeAsync(transactions);
+            await base.SaveChangesAsync();
         }
 
-        public async Task<Transaction> AddAsync(Transaction trans)
-        {
-            await base.AddAsync(trans);
-            return trans;
-        }
-
-        public override async ValueTask DisposeAsync()
-        {
-            await SaveChangesAsync();
-            await base.DisposeAsync();
-        }
     }
 }

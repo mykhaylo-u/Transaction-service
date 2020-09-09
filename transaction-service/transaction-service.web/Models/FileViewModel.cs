@@ -8,7 +8,7 @@ namespace transaction_service.web.Models
     {
         [Required]
         [MaxFileSize(1 * 1024 * 1024, ErrorMessage = "File size should not overrun {0} bytes")]
-        [AllowedFileExtensionsAttribute(new[] { ".csv", ".xml" }, ErrorMessage = "Unknown file. Please select {0} file")]
+        [AllowedFileExtensions(new[] { ".csv", ".xml" }, ErrorMessage = "Unknown file. Please select {0} file")]
         public IFormFile File { get; set; }
     }
 }

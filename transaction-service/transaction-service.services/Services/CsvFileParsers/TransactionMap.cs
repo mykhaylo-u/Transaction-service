@@ -2,7 +2,7 @@
 using System;
 using transaction_service.domain.Entities;
 
-namespace transaction_service.services.Services.CsvFileService.Maps
+namespace transaction_service.services.Services.CsvFileParsers
 {
     public class TransactionMap : ClassMap<Transaction>
     {
