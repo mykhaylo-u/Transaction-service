@@ -9,24 +9,24 @@ transaction-service
        
   1.2 xml  
     Example:  
-                    <Transactions>
-                    <Transaction id="Inv00001">
-                    <TransactionDate>2019-01-23T13:45:10</TransactionDate>
-                    <PaymentDetails>
-                    <Amount>200.00</Amount>
-                    <CurrencyCode>USD</CurrencyCode>
-                    </PaymentDetails>
-                    <Status>Done</Status>
-                    </Transaction>
-                    <Transaction id="Inv00002">
-                    <TransactionDate>2019-01-24T16:09:15</TransactionDate>
-                    <PaymentDetails>
-                    <Amount>10000.00</Amount>
-                    <CurrencyCode>EUR</CurrencyCode>
-                    </PaymentDetails>
-                    <Status>Rejected</Status>
-                    </Transaction>
-                    </Transactions>
+    ```<Transactions>
+       <Transaction id="Inv00001">
+       <TransactionDate>2019-01-23T13:45:10</TransactionDate>
+       <PaymentDetails>
+       <Amount>200.00</Amount>
+       <CurrencyCode>USD</CurrencyCode>
+       </PaymentDetails>
+       <Status>Done</Status>
+       </Transaction>
+       <Transaction id="Inv00002">
+       <TransactionDate>2019-01-24T16:09:15</TransactionDate>
+       <PaymentDetails>
+       <Amount>10000.00</Amount>
+       <CurrencyCode>EUR</CurrencyCode>
+       </PaymentDetails>
+       <Status>Rejected</Status>
+       </Transaction>
+       </Transactions>```
                
 2. Transaction service API  
   2.1 GET transaction filtered by currency       /api/transactions/currency?currency=USA  
