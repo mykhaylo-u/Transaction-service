@@ -21,7 +21,7 @@ namespace transaction_service.services.Services.XmlFileService
         {
             using var fileStream = new StreamReader(new MemoryStream(file.Content));
             XmlSerializer serializer = new XmlSerializer(typeof(List<U>),
-                string.IsNullOrEmpty(_rootNode) ? new XmlRootAttribute(_rootNode) : null);
+                !string.IsNullOrEmpty(_rootNode) ? new XmlRootAttribute(_rootNode) : null);
 
             var documentList = (List<U>)serializer.Deserialize(fileStream);
 

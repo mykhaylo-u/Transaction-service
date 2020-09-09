@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using transaction_service.database;
 using transaction_service.domain.Interfaces;
 using transaction_service.services;
 using transaction_service.services.Services;
@@ -24,10 +26,16 @@ namespace transaction_service.web
             services.AddControllersWithViews();
             services.AddScoped<IFileUploader, FileUploader>();
             services.AddScoped<IFileParserFactory, FileParserFactory>();
+
+            //Add database
+            services
+                .AddDbContext<ITransactionDbContext, TransactionDbContext>(opt =>
+                    opt.UseSqlServer(Configuration.GetConnectionString("TransactionConnection"),
+                        builder => builder.MigrationsAssembly("transaction-service.database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ITransactionDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -48,6 +56,8 @@ namespace transaction_service.web
             {
                 endpoints.MapControllerRoute("default", "{controller=FileUpload}/{action=Index}");
             });
+
+            dbContext.DatabaseCheckCreate();
         }
     }
 }
