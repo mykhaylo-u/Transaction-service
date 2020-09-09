@@ -81,14 +81,29 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%
+    width: 100%;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 20%;
+    padding-bottom: 20%;
 }
 
 
 .uploader-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 2px;
+    background-color: white;
+}
+
+
+.form-container {
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-    width: 500px
+    width: 500px;
 }

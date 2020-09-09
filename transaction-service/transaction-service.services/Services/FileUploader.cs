@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using transaction_service.domain.Entities;
 using System.IO;
 using transaction_service.services.Services.CsvFileService.ErrorHandling;
+using transaction_service.services.Services.XmlFileParsers.ErrorHandling;
+using transaction_service.domain.ErrorHandling;
 
 namespace transaction_service.services.Services
 {
@@ -40,12 +42,22 @@ namespace transaction_service.services.Services
             }
             catch (CsvFileParserException e)
             {
-                _logger.LogError($"Invalid file. File name:{file.FileName}, message:{e.Message}");
+                _logger.LogError($"Csv file parsing failed. File name:{file.FileName}, message:{e.Message}");
+                throw e;
+            }
+            catch (XmlFileParserExeption e)
+            {
+                _logger.LogError($"Xml file parsing failed. File name:{file.FileName}, message:{e.Message}");
+                throw e;
+            }
+            catch (InvalidFileExtensionException e)
+            {
+                _logger.LogError($"Unknown file extension. File name:{file.FileName}, message:{e.Message}");
                 throw e;
             }
             catch (Exception e)
             {
-                _logger.LogError("Invalid file.");
+                _logger.LogError($"Internal server error. File name:{file.FileName}, message:{e.Message}");
                 throw e;
             }
             return true;

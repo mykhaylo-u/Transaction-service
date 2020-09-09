@@ -1,13 +1,13 @@
-2020-09-10 00:04:11,250  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
- 2020-09-10 00:04:11,301  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
- 2020-09-10 00:04:11,332  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Mike\source\repos\transaction-service\transaction-service\transaction-service.web
- 2020-09-10 00:04:42,161 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (8ms) [Parameters=[@p0='?' (Size = 50), @p1='?' (DbType = Decimal), @p2='?' (Size = 3), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+2020-09-09 22:52:33,113  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-09-09 22:52:33,141  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-09-09 22:52:33,147  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Mike\source\repos\transaction-service\transaction-service\transaction-service.web
+ 2020-09-09 22:53:52,720 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (11ms) [Parameters=[@p0='?' (Size = 50), @p1='?' (DbType = Decimal), @p2='?' (Size = 3), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
 SET NOCOUNT ON;
 INSERT INTO [Transactions] ([Id], [Amount], [Currency], [Date], [Status])
 VALUES (@p0, @p1, @p2, @p3, @p4);
- 2020-09-10 00:04:42,262 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'transaction_service.database.TransactionDbContext'.
+ 2020-09-09 22:53:52,821 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'transaction_service.database.TransactionDbContext'.
 Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Violation of PRIMARY KEY constraint 'PK_Transactions'. Cannot insert duplicate key in object 'dbo.Transactions'. The duplicate key value is (Inv00001).
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Violation of PRIMARY KEY constraint 'PK_Transactions'. Cannot insert duplicate key in object 'dbo.Transactions'. The duplicate key value is (Invoice0000004).
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
    at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
@@ -21,7 +21,7 @@ The statement has been terminated.
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-ClientConnectionId:ebe94f35-2a1b-499c-9f66-384834d2b252
+ClientConnectionId:fc0d9740-86bb-49c2-a222-3bb5139f9487
 Error Number:2627,State:1,Class:14
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ Error Number:2627,State:1,Class:14
    at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
  Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Violation of PRIMARY KEY constraint 'PK_Transactions'. Cannot insert duplicate key in object 'dbo.Transactions'. The duplicate key value is (Inv00001).
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Violation of PRIMARY KEY constraint 'PK_Transactions'. Cannot insert duplicate key in object 'dbo.Transactions'. The duplicate key value is (Invoice0000004).
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
    at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
@@ -46,7 +46,7 @@ The statement has been terminated.
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
-ClientConnectionId:ebe94f35-2a1b-499c-9f66-384834d2b252
+ClientConnectionId:fc0d9740-86bb-49c2-a222-3bb5139f9487
 Error Number:2627,State:1,Class:14
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
@@ -56,6 +56,47 @@ Error Number:2627,State:1,Class:14
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
-2020-09-10 00:04:42,524 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_xml.xml, message:An error occurred while updating the entries. See the inner exception for details.
- 2020-09-10 00:04:42,850 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: An error occurred while updating the entries. See the inner exception for details.
+2020-09-09 22:53:53,046 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_csv.csv, message:An error occurred while updating the entries. See the inner exception for details.
+ 2020-09-09 22:53:53,317 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: An error occurred while updating the entries. See the inner exception for details.
+ 2020-09-09 22:57:07,041 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_csv.csv, message:The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 22:57:07,163 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:06,299 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_csv.csv, message:The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:06,433 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:12,285 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_csv.csv, message:The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:12,427 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:25,788 ERROR transaction_service.services.Services.FileUploader.? [?] - MESSAGE: Internal server error. File name:test_csv.csv, message:The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:00:25,916 ERROR file_uploader.web.Controllers.FileUploadController.? [?] - MESSAGE: The conversion cannot be performed.
+    Text: '#####'
+    MemberType: System.Decimal
+    TypeConverter: 'CsvHelper.TypeConversion.DecimalConverter'
+ 2020-09-09 23:12:06,539  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-09-09 23:12:06,594  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-09-09 23:12:06,624  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Mike\source\repos\transaction-service\transaction-service\transaction-service.web
+ 2020-09-09 23:12:59,376  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-09-09 23:12:59,407  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-09-09 23:12:59,412  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Mike\source\repos\transaction-service\transaction-service\transaction-service.web
+ 2020-09-09 23:17:42,936  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-09-09 23:17:42,964  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-09-09 23:17:42,969  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Mike\source\repos\transaction-service\transaction-service\transaction-service.web
  

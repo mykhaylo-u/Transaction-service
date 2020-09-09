@@ -6,5 +6,7 @@ $(".custom-file-input").on("change", function () {
 });
 
 $(".custom-file-input").on("click", function () {
+
     $(".text-success").text('');
+    $(".field-validation-error").text('');
 });
