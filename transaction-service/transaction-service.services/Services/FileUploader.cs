@@ -4,6 +4,7 @@ using transaction_service.domain.Dto;
 using Microsoft.Extensions.Logging;
 using System;
 using transaction_service.database;
+using transaction_service.domain.ErrorHandling;
 
 namespace transaction_service.services.Services
 {
@@ -33,7 +34,7 @@ namespace transaction_service.services.Services
             catch (Exception e)
             {
                 _logger.LogError("Invalid file.");
-                throw new NotImplementedException();  // TODO Add proper error handling
+                throw new FileReadingException(e);
             }
             return true;
         }

@@ -1,7 +1,7 @@
-﻿using System;
-using transaction_service.domain;
+﻿using transaction_service.domain;
 using transaction_service.domain.Entities;
 using transaction_service.domain.Enums;
+using transaction_service.domain.ErrorHandling;
 using transaction_service.domain.Interfaces;
 using transaction_service.services.Services.CsvFileService;
 using transaction_service.services.Services.XmlFileService;
@@ -19,8 +19,7 @@ namespace transaction_service.services
                 case FileExtension.Xml:
                     return CreateXmlFileParser();
                 default:
-                    //TODO: Add proper error handling
-                    throw new NotImplementedException();
+                    throw new FileExtensionException();
             }
         }
 

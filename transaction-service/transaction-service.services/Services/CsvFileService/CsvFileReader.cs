@@ -7,6 +7,7 @@ using System.IO;
 using transaction_service.domain;
 using transaction_service.domain.Dto;
 using transaction_service.domain.Entities;
+using transaction_service.services.Services.CsvFileService.ErrorHandling;
 
 namespace transaction_service.services.Services.CsvFileService
 {
@@ -18,7 +19,7 @@ namespace transaction_service.services.Services.CsvFileService
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
             csv.Configuration.BadDataFound = context =>
-                throw new NotImplementedException(); //TODO: Add proper error handling
+                throw new CsvReaderException($"incorrect symbol at raw and position: {context.RawRecordEndPosition}");
             csv.Configuration.HasHeaderRecord = false;
             csv.Configuration.RegisterClassMap<U>();
 
