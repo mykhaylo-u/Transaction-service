@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Converters;
 using transaction_service.database;
 using transaction_service.domain.Interfaces;
 using transaction_service.services;
@@ -26,7 +28,6 @@ namespace transaction_service.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddScoped<IFileUploader, FileUploader>();
             services.AddScoped<IFileParserFactory, FileParserFactory>();
             services.AddScoped<ITransactionsService, TransactionsService>();
@@ -39,13 +40,31 @@ namespace transaction_service.web
 
             // AutoMapper
             services.AddAutoMapper(typeof(Startup));
+
+
+            //Add Json converting rules
+            services.AddMvc().AddNewtonsoftJson(obj =>
+            {
+                obj.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
+
+            // Add logging
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProviders();
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ITransactionDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ITransactionDbContext dbContext, ILoggerFactory loggerFactory)
         {
             // Error handling
             app.UseMiddleware<ExceptionMiddleware>();
+
+            // Logging
+            loggerFactory.AddLog4Net();
 
             if (env.IsDevelopment())
             {
@@ -67,6 +86,7 @@ namespace transaction_service.web
                 endpoints.MapControllerRoute("default", "{controller=FileUpload}/{action=Index}");
             });
 
+            //create Db if it not exist
             dbContext.DatabaseCheckCreate();
         }
     }
