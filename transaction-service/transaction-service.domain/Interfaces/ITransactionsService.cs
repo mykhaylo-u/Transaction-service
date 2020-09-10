@@ -7,9 +7,9 @@ namespace transaction_service.domain.Interfaces
 {
     public interface ITransactionsService
     {
-        Task<List<Transaction>> GetTransactionsByCurrency(string currencyCode);
-        Task<List<Transaction>> GetTransactionsByStatus(int? status);
-        Task<List<Transaction>> GetTransactionsByDateRange(DateTime? startDate, DateTime? endDate);
+        Task<List<Transaction>> GetTransactionsByCurrencyAsync(string currencyCode);
+        Task<List<Transaction>> GetTransactionsByStatusAsync(int? status);
+        Task<List<Transaction>> GetTransactionsByDateRangeAsync(DateTime? startDate, DateTime? endDate);
 
     }
 }

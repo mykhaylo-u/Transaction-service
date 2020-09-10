@@ -18,7 +18,7 @@ namespace transaction_service.services.Services.Transactions
             _dbContext = dbContext;
         }
 
-        public async Task<List<Transaction>> GetTransactionsByCurrency(string currencyCode)
+        public async Task<List<Transaction>> GetTransactionsByCurrencyAsync(string currencyCode)
         {
             bool isCurrencyExist = !string.IsNullOrEmpty(currencyCode);
 
@@ -26,7 +26,7 @@ namespace transaction_service.services.Services.Transactions
                 .Where(transaction => !isCurrencyExist || transaction.Currency == currencyCode)
                 .ToListAsync();
         }
-        public async Task<List<Transaction>> GetTransactionsByStatus(int? status)
+        public async Task<List<Transaction>> GetTransactionsByStatusAsync(int? status)
         {
             bool isStatusExist = status.HasValue;
 
@@ -36,7 +36,7 @@ namespace transaction_service.services.Services.Transactions
                 .ToListAsync();
         }
 
-        public async Task<List<Transaction>> GetTransactionsByDateRange(DateTime? startDate, DateTime? endDate)
+        public async Task<List<Transaction>> GetTransactionsByDateRangeAsync(DateTime? startDate, DateTime? endDate)
         {
             return await _dbContext.Transactions.Where(transaction =>
                     !startDate.HasValue || transaction.Date >= startDate.Value

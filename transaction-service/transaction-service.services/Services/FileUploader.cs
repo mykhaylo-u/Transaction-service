@@ -26,7 +26,7 @@ namespace transaction_service.services.Services
             _dbContext = dbContext;
         }
 
-        public async Task<bool> UploadFile(FileDto file, MemoryStream memoryStream)
+        public async Task UploadFileAsync(FileDto file, MemoryStream memoryStream)
         {
             var fileParser = _fileParserFactory.CreateParser(file.Extension);
             try
@@ -60,7 +60,6 @@ namespace transaction_service.services.Services
                 _logger.LogError($"Internal server error. File name:{file.FileName}, message:{e.Message}");
                 throw e;
             }
-            return true;
         }
     }
 }

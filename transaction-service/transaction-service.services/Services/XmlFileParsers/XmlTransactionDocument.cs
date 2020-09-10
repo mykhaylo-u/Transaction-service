@@ -21,9 +21,9 @@ namespace transaction_service.services.Services.XmlFileParsers
         public XmlTransactionStatusDocument Status { get; set; }
 
 
-        public async Task<Transaction> MapToEntity()
+        public Task<Transaction> MapToEntity()
         {
-            return await Task.Run(() => new Transaction
+            return Task.Run(() => new Transaction
             {
                 Id = Id,
                 Amount = PaymentDetails.Amount,

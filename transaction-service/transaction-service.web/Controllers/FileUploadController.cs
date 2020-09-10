@@ -38,7 +38,7 @@ namespace file_uploader.web.Controllers
         /// <param name="fileViewModel"></param>
         /// <returns></returns>
         [HttpPost("fileUpload")]
-        public async Task<IActionResult> FileUpload(FileViewModel fileViewModel)
+        public async Task<IActionResult> FileUploadAsync(FileViewModel fileViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -56,14 +56,9 @@ namespace file_uploader.web.Controllers
                     Extension = FileExtensionHelper.GetFileExtension(fileViewModel.File.FileName),
                 };
 
-                var result = await _fileUploader.UploadFile(file, memoryStream);
-                if (result)
-                {
-                    TempData["IsSuccess"] = "File has been uploaded successfully.";
-                }else
-                {
-                    ModelState.AddModelError("Exception", $"Internal server error.");
-                }
+                await _fileUploader.UploadFileAsync(file, memoryStream);
+
+                TempData["IsSuccess"] = "File has been uploaded successfully.";
             }
             catch (Exception e)
             {
