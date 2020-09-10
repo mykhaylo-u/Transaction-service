@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using transaction_service.domain.Dto.Transactions;
 using transaction_service.domain.Entities;
-using transaction_service.web.Models.Dto;
 
-namespace transaction_service.web.Models.Mappings
+namespace transaction_service.services.Services.Transactions.Mapping
 {
     public class TransactionMap : Profile
     {

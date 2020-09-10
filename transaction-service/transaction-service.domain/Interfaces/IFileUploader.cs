@@ -6,6 +6,6 @@ namespace transaction_service.domain.Interfaces
 {
     public interface IFileUploader
     {
-        Task UploadFileAsync(FileDto file, MemoryStream memoryStream);
+        public Task UploadFileAsync(FileDto file, MemoryStream memoryStream);
     }
 }

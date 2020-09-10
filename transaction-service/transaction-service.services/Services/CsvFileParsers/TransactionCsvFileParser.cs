@@ -18,7 +18,7 @@ namespace transaction_service.services.Services.CsvFileParsers
 
             csv.Configuration.BadDataFound = context => throw new CsvFileParserException(context.RawRecordEndPosition);
             csv.Configuration.HasHeaderRecord = false;
-            csv.Configuration.RegisterClassMap<TransactionMap>();
+            csv.Configuration.RegisterClassMap<CsvTransactionMap>();
 
             await foreach (var record in csv.GetRecordsAsync<Transaction>())
             {

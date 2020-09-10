@@ -4,9 +4,9 @@ using transaction_service.domain.Entities;
 
 namespace transaction_service.services.Services.CsvFileParsers
 {
-    public class TransactionMap : ClassMap<Transaction>
+    public class CsvTransactionMap : ClassMap<Transaction>
     {
-        public TransactionMap()
+        public CsvTransactionMap()
         {
             Map(m => m.Id).Index(0);
             Map(m => m.Amount).Index(1);
