@@ -6,6 +6,6 @@ namespace transaction_service.domain.Interfaces
 {
     public interface IFileParserFactory
     {
-        IFileParser<Transaction> CreateParser(FileExtension fileExtension);
+        public IFileParser<Transaction> CreateParser(FileExtension fileExtension);
     }
 }

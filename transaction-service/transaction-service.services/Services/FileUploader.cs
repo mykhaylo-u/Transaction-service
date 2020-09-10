@@ -17,13 +17,13 @@ namespace transaction_service.services.Services
     {
         private readonly ILogger<FileUploader> _logger;
         private readonly IFileParserFactory _fileParserFactory;
-        private readonly ITransactionDbContext _dbContext;
+        private readonly ITransactionsService _transactionsService;
 
-        public FileUploader(ILogger<FileUploader> logger, IFileParserFactory fileParserFactory, ITransactionDbContext dbContext)
+        public FileUploader(ILogger<FileUploader> logger, IFileParserFactory fileParserFactory, ITransactionsService transactionsService)
         {
             _logger = logger;
             _fileParserFactory = fileParserFactory;
-            _dbContext = dbContext;
+            _transactionsService = transactionsService;
         }
 
         public async Task UploadFileAsync(FileDto file, MemoryStream memoryStream)
@@ -38,7 +38,7 @@ namespace transaction_service.services.Services
                     transactions.Add(trans);
                 }
 
-                await _dbContext.AddRangeAsync(transactions);
+                await _transactionsService.AddTransactionRangeAsync(transactions);
             }
             catch (CsvFileParserException e)
             {

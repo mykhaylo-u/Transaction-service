@@ -1,4 +1,4 @@
-﻿namespace transaction_service.web.Models.Dto
+﻿namespace transaction_service.domain.Dto.Transactions
 {
     public enum TransactionStatusEnumDto
     {

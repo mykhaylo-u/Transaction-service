@@ -8,7 +8,7 @@ using transaction_service.database;
 
 namespace transaction_service.database.Migrations
 {
-    [DbContext(typeof(TransactionDbContext))]
+    [DbContext(typeof(EFDbContext))]
     partial class TransactionDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using transaction_service.database;
+using transaction_service.database.Repository;
+using transaction_service.domain.Dto.Transactions;
 using transaction_service.domain.Entities;
 using transaction_service.domain.Interfaces;
 
@@ -11,39 +13,44 @@ namespace transaction_service.services.Services.Transactions
 {
     public class TransactionsService : ITransactionsService
     {
-        private readonly ITransactionDbContext _dbContext;
+        private readonly IRepository<Transaction> _repository;
+        private readonly IMapper _mapper;
 
-        public TransactionsService(ITransactionDbContext dbContext)
+        public TransactionsService(IRepository<Transaction> repository, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<List<Transaction>> GetTransactionsByCurrencyAsync(string currencyCode)
+        public async Task AddTransactionRangeAsync(List<Transaction> transactions)
+        {
+            await _repository.AddRangeAsync(transactions);
+        }
+
+        public async Task<List<TransactionDto>> GetTransactionsByCurrencyAsync(string currencyCode)
         {
             bool isCurrencyExist = !string.IsNullOrEmpty(currencyCode);
 
-            return await _dbContext.Transactions
-                .Where(transaction => !isCurrencyExist || transaction.Currency == currencyCode)
-                .ToListAsync();
+            return await _repository.GetAll().Where(transaction => !isCurrencyExist || transaction.Currency == currencyCode)
+                .Select(transaction => _mapper.Map<TransactionDto>(transaction)).ToListAsync();
         }
-        public async Task<List<Transaction>> GetTransactionsByStatusAsync(int? status)
+        public async Task<List<TransactionDto>> GetTransactionsByStatusAsync(int? status)
         {
             bool isStatusExist = status.HasValue;
 
             var entityStatus = status == null ? TransactionStatus.Approved : (TransactionStatus)status.Value;
-
-            return await _dbContext.Transactions.Where(transaction => !isStatusExist || transaction.Status == entityStatus)
-                .ToListAsync();
+            return await _repository.GetAll().Where(transaction => !isStatusExist || transaction.Status == entityStatus)
+                .Select(transaction => _mapper.Map<TransactionDto>(transaction)).ToListAsync();
         }
 
-        public async Task<List<Transaction>> GetTransactionsByDateRangeAsync(DateTime? startDate, DateTime? endDate)
+        public async Task<List<TransactionDto>> GetTransactionsByDateRangeAsync(DateTime? startDate, DateTime? endDate)
         {
-            return await _dbContext.Transactions.Where(transaction =>
+            return await _repository.GetAll().Where(transaction =>
                     !startDate.HasValue || transaction.Date >= startDate.Value
                     && (!endDate.HasValue || transaction.Date <= endDate.Value))
-                .ToListAsync();
+                .Select(transaction => _mapper.Map<TransactionDto>(transaction)).ToListAsync();
         }
 
-        
+
     }
 }

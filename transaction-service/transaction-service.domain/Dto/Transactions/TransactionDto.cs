@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace transaction_service.web.Models.Dto
+namespace transaction_service.domain.Dto.Transactions
 {
     public class TransactionDto
     {

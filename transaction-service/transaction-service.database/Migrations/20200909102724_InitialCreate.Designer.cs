@@ -9,7 +9,7 @@ using transaction_service.database;
 
 namespace transaction_service.database.Migrations
 {
-    [DbContext(typeof(TransactionDbContext))]
+    [DbContext(typeof(EFDbContext))]
     [Migration("20200909102724_InitialCreate")]
     partial class InitialCreate
     {
