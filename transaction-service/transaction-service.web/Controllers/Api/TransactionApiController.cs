@@ -22,23 +22,23 @@ namespace transaction_service.web.Controllers.Api
         }
 
         [HttpGet("currency")]
-        public async Task<IActionResult> GetTransactionsByCurrency([FromQuery] string code)
+        public async Task<IActionResult> GetTransactionsByCurrencyAsync([FromQuery] string code)
         {
-            var transactions = await _transactionsService.GetTransactionsByCurrency(code);
+            var transactions = await _transactionsService.GetTransactionsByCurrencyAsync(code);
             return Ok(transactions.Select(transaction => _mapper.Map<TransactionDto>(transaction)));
         }
 
         [HttpGet("status")]
-        public async Task<IActionResult> GetTransactionsByStatus([FromQuery] TransactionStatusEnumDto? status)
+        public async Task<IActionResult> GetTransactionsByStatusAsync([FromQuery] TransactionStatusEnumDto? status)
         {
-            var transactions = await _transactionsService.GetTransactionsByStatus(status.HasValue ? (int?)status : null);
+            var transactions = await _transactionsService.GetTransactionsByStatusAsync(status.HasValue ? (int?)status : null);
             return Ok(transactions.Select(transaction => _mapper.Map<TransactionDto>(transaction)));
         }
 
         [HttpGet("dateRange")]
-        public async Task<IActionResult> GetTransactionsByDateRange([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+        public async Task<IActionResult> GetTransactionsByDateRangeAsync([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
         {
-            var transactions = await _transactionsService.GetTransactionsByDateRange(startDate, endDate);
+            var transactions = await _transactionsService.GetTransactionsByDateRangeAsync(startDate, endDate);
             return Ok(transactions.Select(transaction => _mapper.Map<TransactionDto>(transaction)));
         }
     }
